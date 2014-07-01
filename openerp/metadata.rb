@@ -7,13 +7,8 @@ long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.0'
 
 depends "supervisor"
-depends "gunicorn"
 depends "nginx"
 depends "postgresql"
-depends "java"
-depends "openoffice"
-depends "idt_infra_tools"
-
 
 
 %w{ ubuntu }.each do |os|

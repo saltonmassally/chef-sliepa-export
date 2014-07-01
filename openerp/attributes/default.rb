@@ -27,7 +27,7 @@ default[:openerp][:database][:maxconn] = 300
 default[:openerp][:servername] = 'export.sliepa.sl'
 
 
-default[:openerp][:data_dir] = '/data'
+default[:openerp][:data_dir] = '/mnt/data'
 default[:openerp][:db_filter] = '^%d$'
 default[:openerp][:debug_mode] = 'False'
 default[:openerp][:email_from] = 'info@sliepa.sl'
