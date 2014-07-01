@@ -7,8 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 include_recipe 'idt_infra_tools'
-include_recipe "postgresql::server"
-include_recipe "postgresql::libpq"
+include_recipe "postgresql::client"
 include_recipe "supervisor"
 include_recipe "nginx::repo"
 include_recipe "nginx"
@@ -46,10 +45,6 @@ bash "correct_for_pillow" do
   EOH
 end
 
-pg_user node[:openerp][:database][:user] do
-  privileges :superuser => true, :createdb => true, :login => true
-  password node[:openerp][:database][:password]
-end
 
 cookbook_file "404.tar.gz" do
   path "#{node[:openerp][:static_http_document_root]}404.tar.gz"
