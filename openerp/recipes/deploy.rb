@@ -6,6 +6,12 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+node[:openerp][:pip_packages].each do |pkg|
+    python_pip pkg do
+      action :install
+    end
+  end
+
 include_recipe "supervisor"
 include_recipe "openerp"
 include_recipe "nginx::repo"
@@ -46,11 +52,7 @@ node[:deploy].each do |application, deploy|
     only_if { ::File.exists?(node[:openerp][:data_dir]) }
   end
 
-  node[:openerp][:pip_packages].each do |pkg|
-    python_pip pkg do
-      action :install
-    end
-  end
+  
 
   script 'execute_setup' do
     interpreter "bash"

@@ -10,7 +10,9 @@ default[:openerp][:apt_packages] = %w[
   libevent-dev
   ghostscript
   poppler-utils
+  libpq-dev
 ]
+
 
 default[:openerp][:pip_packages] = %w[
   raven
