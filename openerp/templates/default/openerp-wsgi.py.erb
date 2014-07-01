@@ -31,31 +31,28 @@ conf['addons_path'] = '<%=@deploy_path %><%=node[:openerp][:addon_path]%>'
 conf['admin_passwd'] = '<%=node[:openerp][:admin_pass]%>'
 conf['data_dir'] = '<%=node[:openerp][:data_dir]%>'
 conf['db_maxconn'] = <%=node[:openerp][:database][:maxconn]%>
-conf['dbfilter'] = '<%=node[:openerp][:db_filter]%>'
+conf['dbfilter'] = '<%=@database[:name] %>'
 conf['debug_mode'] = <%=node[:openerp][:debug_mode]%>
 conf['disable_footer'] = False
 conf['disable_database_manager'] = True
 conf['email_from'] = '<%=node[:openerp][:email_from]%>'
-# conf['import_partial'] = True (this triggers error)
 conf['list_db'] = <%=node[:openerp][:debug_mode]%>
-conf['logfile'] = '<%=@log_file %>'
+conf['logfile'] = 'openerp.log'
 conf['logrotate'] = True
 conf['sentry_dsn'] = '<%=node[:openerp][:sentry_dsn]%>'
 conf['aws_access_key'] = '<%=node[:openerp][:aws_access_key]%>'
 conf['aws_secret_key'] = '<%=node[:openerp][:aws_secret_key]%>'
 conf['aws_s3_bucket']  = '<%=node[:openerp][:aws_s3_bucket]%>'
-conf['route53_zone_id']  = '<%=node[:openerp][:route53_zone_id]%>'
-conf['domain']  = '<%=node[:openerp][:domain]%>'
-conf['elastic_ip']  = '<%=node[:openerp][:elastic_ip]%>'
+conf['db_template'] = 'template0'
 #conf['static_http_document_root'] = '<%=node[:openerp][:static_http_document_root]%>'
 #conf['static_http_enable'] = True
 #conf['static_http_url_prefix'] = '<%=node[:openerp][:static_http_url_prefix]%>'
 
 
 # Optional database config if not using local socket
-conf['db_name'] = '<%=@database[:database] %>'
+conf['db_name'] = '<%=@database[:name] %>'
 conf['db_host'] = '<%=@database[:host] %>'
-conf['db_user'] = '<%=@database[:username] %>'
+conf['db_user'] = '<%=@database[:user] %>'
 conf['db_port'] = <%=@database[:port] %>
 conf['db_password'] = '<%=@database[:password] %>'
 
@@ -71,7 +68,7 @@ openerp.service.server.load_server_wide_modules()
 #----------------------------------------------------------
 # Standard OpenERP XML-RPC port is 8069
 bind = '127.0.0.1:8069'
-pidfile = '<%=@pid_file %>'
+pidfile = 'openerp.pid'
 workers = multiprocessing.cpu_count() * 2 + 1
 timeout = 240
 max_requests = 2000

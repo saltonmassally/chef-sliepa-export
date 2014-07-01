@@ -6,32 +6,34 @@ csv_internal_sep = ,
 data_dir = <%=node[:openerp][:data_dir]%>
 db_host = <%=@database[:host] %>
 db_maxconn = <%=node[:openerp][:database][:maxconn]%>
+db_name = <%=@database[:name] %>
 db_password = <%=@database[:password] %>
 db_port = <%=@database[:port] %>
-db_template = template1
-db_user = <%=@database[:username] %>
+db_template = template0
+db_user = <%=@database[:user] %>
 dbfilter = <%=node[:openerp][:db_filter]%> 
 debug_mode = <%=node[:openerp][:debug_mode]%>
 demo = {}
+disable_footer = False
+disable_database_manager = True
 email_from = <%=node[:openerp][:email_from]%>
-import_partial = False
 limit_memory_hard = 805306368
 limit_memory_soft = 671088640
 limit_request = 8192
-limit_time_cpu = 60
-limit_time_real = 120
+limit_time_cpu = 600
+limit_time_real = 1200
 list_db = False
 log_handler = [':INFO']
 log_level = info
-logfile = <%=@log_file %>
+logfile = .openerp.log
 logrotate = True
 longpolling_port = 8072
 max_cron_threads = 2
 osv_memory_age_limit = 1.0
 osv_memory_count_limit = False
 pg_path = None
-pidfile = <%=@pid_file %>
-proxy_mode = False
+pidfile = .openerp.pid
+proxy_mode = True
 reportgz = False
 secure_cert_file = server.cert
 secure_pkey_file = server.pkey
@@ -49,7 +51,7 @@ test_commit = False
 test_enable = False
 test_file = False
 test_report_directory = False
-timezone = False
+timezone = Africa/Freetown
 translate_modules = ['all']
 unaccent = False
 without_demo = False
@@ -61,12 +63,7 @@ xmlrpcs = True
 xmlrpcs_interface = 
 xmlrpcs_port = 8071
 sentry_dsn = <%=node[:openerp][:sentry_dsn]%>
-aws_access_key = <%=node[:openerp][:aws_access_key]%>
-aws_secret_key = <%=node[:openerp][:aws_secret_key]%>
-aws_s3_bucket  = <%=node[:openerp][:aws_s3_bucket]%>
-route53_zone_id = <%=node[:openerp][:route53_zone_id]%>
-domain  = <%=node[:openerp][:domain]%>
-elastic_ip = <%=node[:openerp][:elastic_ip]%>
+
 
 
 

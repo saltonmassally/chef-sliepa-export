@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+#Substitute your postgresql root username in the below given line
+PGUSER=node[:openerp][:database][:user]
+#Substitute your postgresql root password in the below given line
+PGPASSWORD=node[:openerp][:database][:password]
+export PGUSER PGPASSWORD
+
+
+BUCKET=<%=node[:openerp][:aws_s3_bucket]%>
+PROJECT="<%=node[:openerp][:project_name]%>"
+DATABASE=<%=node[:openerp][:database][:name]%>
+USER=<%=node[:openerp][:database][:user]%>
+
+TIMESTAMP=$(date +%Y-%m-%d)
+TEMP_FILE=$(mktemp tmp.XXXXXXXXXX)
+TEMP_FILE_GZ=${TEMP_FILE}.tgz
+S3_FILE="s3://${BUCKET}/${PROJECT}/${DATABASE}/backup-${TIMESTAMP}.tar.gz"
+pg_dump -f $TEMP_FILE -i -x -O -R  $DATABASE
+tar -czf ${TEMP_FILE_GZ} ${TEMP_FILE}
+#pg_dump $BUCKET > $TEMP_FILE
+s3cmd put $TEMP_FILE ${S3_FILE}  
+rm "$TEMP_FILE"
+
+#reset PGUSER and PGPASSWORD
+PGUSER=""
+PGPASSWORD=""
+export PGUSER PGPASSWORD
+

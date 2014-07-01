@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+BUCKET=<%=node[:openerp][:aws_s3_bucket]%>
+PROJECT="<%=node[:openerp][:project_name]%>"
+DIRECTORY=<%=node[:openerp][:data_dir]%>
+S3_FILE="s3://${BUCKET}/${PROJECT}/data"
+
+s3cmd sync --delete-removed ${DIRECTORY} ${S3_FILE}

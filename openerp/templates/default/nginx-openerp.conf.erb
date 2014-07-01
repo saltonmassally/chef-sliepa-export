@@ -1,0 +1,52 @@
+upstream app_server {
+	server 127.0.0.1:8069 weight=1 fail_timeout=500s;
+}
+
+server {
+	listen 80 default;
+	client_max_body_size 10G;
+	server_name <%=node[:openerp][:servername]%>;
+
+	keepalive_timeout 95;
+
+    # increase proxy timeouts to prevent 504 Gateway Time-Out
+    proxy_connect_timeout       600;
+    proxy_send_timeout          600;
+    proxy_read_timeout          600;
+    send_timeout                600;
+    
+    # increase proxy buffer to handle some OpenERP web requests
+    proxy_buffers 16 64k;
+    proxy_buffer_size 128k;
+    
+    
+    
+	# path for static files
+	#root <%=node[:openerp][:static_http_document_root]%>;
+
+	location / {
+	    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	    proxy_set_header Host $host;
+	    proxy_set_header X-Real-IP $remote_addr;
+	    proxy_set_header X-Scheme $scheme;
+	    proxy_redirect off;
+	    proxy_pass   http://localhost:8069;
+	}
+	
+	# cache some static data in memory for 60mins.
+    # under heavy load this should relieve stress on the OpenERP web interface a bit.
+    location ~* <%=node[:openerp][:static_http_document_root]%> {
+        proxy_cache_valid 200 60m;
+        proxy_buffering    on;
+        expires 864000;
+        proxy_pass   http://localhost:8069;
+    }
+
+	error_page 500 502 503 504 404 /404/index.html;
+	location ~* /404/ {
+	    root <%=node[:openerp][:static_http_document_root]%>;
+	    index index.html;
+	}
+
+}
+
