@@ -8,6 +8,7 @@
 #
 include_recipe 'idt_infra_tools'
 include_recipe "supervisor"
+include_recipe "nginx::repo"
 include_recipe "nginx"
 include_recipe "nginx::http_stub_status_module"
 
