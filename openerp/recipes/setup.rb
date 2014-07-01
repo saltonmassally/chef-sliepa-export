@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 include_recipe 'idt_infra_tools'
+include_recipe "postgresql::server"
+include_recipe "postgresql::libpq"
 include_recipe "supervisor"
 include_recipe "nginx::repo"
 include_recipe "nginx"
