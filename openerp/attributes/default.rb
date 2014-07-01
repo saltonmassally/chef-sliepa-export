@@ -55,7 +55,7 @@ override['nginx']['gzip'] = 'on'
 
 override['postgresql']['enable_pgdg_apt'] = true 
 override['postgresql']['version'] = '9.3'
-override[:chef_ec2_ebs_snapshot][:description] = "data.hris.sl data directory Backup $(date +'%Y-%m-%d %H:%M:%S')"
+override[:chef_ec2_ebs_snapshot][:description] = "export.sliepa.sl data directory Backup $(date +'%Y-%m-%d %H:%M:%S')" 
 
 #set the ff in stack settings
 # node['supervisor']['inet_username']
