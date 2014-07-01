@@ -12,4 +12,4 @@ cookbook 'supervisor'
 cookbook 'chef-ec2-ebs-snapshot', git: 'git://github.com/tarzan0820/chef-ec2-consistent-snapshot.git'
 cookbook 'postfix-ses', git: 'git://github.com/tarzan0820/chef-postfix-ses.git'
 cookbook "postgresql", git: 'git://github.com/phlipper/chef-postgresql'
-cookbook "build-essential", '~> 1.4.4'
+
