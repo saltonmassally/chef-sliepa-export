@@ -27,7 +27,7 @@ default[:openerp][:database][:maxconn] = 300
 default[:openerp][:servername] = 'export.sliepa.sl'
 
 
-default[:openerp][:data_dir] = '/mnt/data/openerp'
+default[:openerp][:data_dir] = '/data/'
 default[:openerp][:db_filter] = '^%d$'
 default[:openerp][:debug_mode] = 'False'
 default[:openerp][:email_from] = 'info@sliepa.sl'
@@ -55,7 +55,7 @@ override['nginx']['gzip'] = 'on'
 
 override['postgresql']['enable_pgdg_apt'] = true 
 override['postgresql']['version'] = '9.3'
-override['postgresql']['data_directory'] = '/mnt/data/postgresql/#{node["postgresql"]["version"]}/main'
+#override['postgresql']['data_directory'] = '/mnt/data/postgresql/#{node["postgresql"]["version"]}/main'
 override[:chef_ec2_ebs_snapshot][:description] = "export.sliepa.sl data directory Backup $(date +'%Y-%m-%d %H:%M:%S')" 
 
 #set the ff in stack settings
