@@ -49,7 +49,6 @@ node[:deploy].each do |application, deploy|
 # lets ensure that the data dir is writable
   bash "correct_directory_permission" do
     command "chown {deploy[:user]}:{deploy[:group]} {node[:openerp][:data_dir]}; chmod 775 {node[:openerp][:data_dir]}"
-    only_if { ::File.exists?(node[:openerp][:data_dir]) }
   end
 
   
