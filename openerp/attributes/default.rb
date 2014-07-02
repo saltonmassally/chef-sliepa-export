@@ -29,7 +29,7 @@ default[:openerp][:database][:maxconn] = 300
 default[:openerp][:servername] = 'export.sliepa.sl'
 
 
-default[:openerp][:data_dir] = '/mnt/data/'
+default[:openerp][:data_dir] = '/mnt/data'
 default[:openerp][:db_filter] = '^%d$'
 default[:openerp][:debug_mode] = 'False'
 default[:openerp][:email_from] = 'info@sliepa.sl'
@@ -37,12 +37,7 @@ default[:openerp][:email_from] = 'info@sliepa.sl'
 default[:openerp][:admin_pass] = 'supersecret'
 default[:openerp][:addon_path] = 'openerp/addons/'
 default[:openerp][:sentry_dsn] = 'secret'
-default[:openerp][:aws_access_key] = 'secret'
-default[:openerp][:aws_secret_key] = 'secret'
-default[:openerp][:route53_zone_id] = ''
-default[:openerp][:domain] = ''
-default[:openerp][:workers] = 3
-default[:openerp][:elastic_ip] = ''
+default[:openerp][:workers] = 5
 default[:openerp][:static_http_document_root] = '/var/www/'
 default[:openerp][:static_http_url_prefix]= '/static'
 
