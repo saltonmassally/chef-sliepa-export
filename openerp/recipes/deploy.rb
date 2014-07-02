@@ -41,7 +41,7 @@ node[:deploy].each do |application, deploy|
   directory node[:openerp][:data_dir] do
     owner deploy[:user]
     group deploy[:group]
-    mode 00755
+    mode 00775
     action :create
     not_if { ::File.exists?(node[:openerp][:data_dir]) }
   end
@@ -128,22 +128,13 @@ node[:deploy].each do |application, deploy|
   end
 
   supervisor_service "openerp" do
-    action :stop
+    action :restart
   end
 
   service "postgresql" do
     action :restart
   end
 
-
-  script 'execute_db_update' do
-    interpreter "bash"
-    user deploy[:user]
-    cwd deploy[:absolute_document_root]
-    environment 'HOME' => "/home/#{deploy[:user]}"
-    code "python db_update.py --backup_dir=#{node[:openerp][:data_dir]}/backups/"
-    notifies :restart, "supervisor_service[openerp]"
-  end
 
   template "/etc/nginx/sites-enabled/ngnix-openerp" do
     source "ngnix-openerp.conf.erb"
