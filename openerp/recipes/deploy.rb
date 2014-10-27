@@ -53,12 +53,12 @@ node[:deploy].each do |application, deploy|
 
   
 
-  script 'execute_setup' do
-    interpreter "bash"
-    user "root"
-    cwd deploy[:absolute_document_root]
-    code "python setup.py install"
-  end
+#  script 'execute_setup' do
+#    interpreter "bash"
+#    user "root"
+#    cwd deploy[:absolute_document_root]
+#    code "python setup.py install"
+#  end
 
   script 'chmod_gevent' do
     interpreter "bash"
@@ -67,14 +67,14 @@ node[:deploy].each do |application, deploy|
     code "chmod +x openerp-gevent"
   end
 
-# lets bring back sanity
-  bash "fix_packages" do
-    cwd '/tmp'
-    code <<-EOH
-    wget http://python-distribute.org/distribute_setup.py
-    python distribute_setup.py
-    EOH
-  end
+## lets bring back sanity
+#  bash "fix_packages" do
+#    cwd '/tmp'
+#    code <<-EOH
+#    wget http://python-distribute.org/distribute_setup.py
+#    python distribute_setup.py
+#    EOH
+#  end
 
   template "#{deploy[:absolute_document_root]}openerp-wsgi.py" do
     source "openerp-wsgi.py.erb"

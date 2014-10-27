@@ -11,7 +11,7 @@ db_port = <%=@database[:port] %>
 db_template = template1
 db_user = <%=@database[:username] %>
 db_name = <%=@database[:database] %>
-dbfilter = <%=@database[:database] %>
+dbfilter = ^<%=@database[:database]%>$
 debug_mode = <%=node[:openerp][:debug_mode]%>
 email_from = <%=node[:openerp][:email_from]%>
 demo = {}
